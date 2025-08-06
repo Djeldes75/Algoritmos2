@@ -14,8 +14,8 @@ El contenido se organiza en dos secciones principales: **Teoría** y **Laborator
 
 ## 🛠️ Tecnologías
 
-- Lenguaje: `C++`
-- Herramientas: Visual Studio Code, Visual Studio 2022, Git, GitHub
+- Lenguaje: `C++` y `Python`.
+- Herramientas: Visual Studio Code, Visual Studio 2022, Git, GitHub.
 
 ---
 
