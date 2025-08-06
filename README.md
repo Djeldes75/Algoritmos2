@@ -1,4 +1,4 @@
-# 📘 Datos-Algoritmos2
+# 📘 Estructura de Datos Algoritmos 2
 
 Repositorio académico para almacenar proyectos y tareas de las materias: **Estructuras de Datos y Algoritmos 2**.
 El contenido se organiza en dos secciones principales: **Teoría** y **Laboratorio**.
