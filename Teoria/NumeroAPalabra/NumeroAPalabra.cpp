@@ -1,15 +1,15 @@
 /*
 -------------------------------------------------------------------------------------------------------
-Tarea: #1 - Convertir N˙mero a Palabra
+Tarea: #1 - Convertir N√∫mero a Palabra
 Materia: Estructuras De Datos y Algoritmos 2
 -------------------------------------------------------------------------------------------------------
-Realizar un programa C++ que lea un n˙mero real (correspondiente a un monto) y convertir este monto
-a palabra utilizando el enfoque de divide y vencer·s.
+Realizar un programa C++ que lea un n√∫mero real (correspondiente a un monto) y convertir este monto
+a palabra utilizando el enfoque de divide y vencer√°s.
 
 RESTRICCIONES:
-    A. El n˙mero tiene m·scara 999,999,999.99
-    B. Solo llevar a palabras la parte entera del n˙mero
-    C. Utilizar el enfoque de divide y vencer·s
+    A. El n√∫mero tiene m√°scara 999,999,999.99
+    B. Solo llevar a palabras la parte entera del n√∫mero
+    C. Utilizar el enfoque de divide y vencer√°s
     D. Observar todas las reglas gramaticales relativas a nombrar los numerales
     E. Las entradas de datos del usuario deben ser debidamente validadas
 
@@ -17,12 +17,12 @@ EJEMPLO:
     Entrada: 12,345.90
     Salida: Doce mil trescientos cuarenta y cinco con 90 centavos
 
-ENFOQUE DIVIDE Y VENCER¡S:
-    - DIVIDIR: Separar el n˙mero en millones, miles y cientos
+ENFOQUE DIVIDE Y VENCER√ÅS:
+    - DIVIDIR: Separar el n√∫mero en millones, miles y cientos
     - RESOLVER: Convertir cada parte independientemente
     - COMBINAR: Unir los resultados respetando reglas gramaticales
 
-Fecha: Noviembre 2025
+Fecha: 5 Ago 2025
 */
 
 #include <iostream>
@@ -32,9 +32,9 @@ Fecha: Noviembre 2025
 
 using namespace std;
 
-// Arrays para conversiÛn de n˙meros a palabras
+// Arrays para conversi√≥n de n√∫meros a palabras
 string unidades[] = { "", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve" };
-string especiales[] = { "diez", "once", "doce", "trece", "catorce", "quince", "diecisÈis", "diecisiete", "dieciocho", "diecinueve" };
+string especiales[] = { "diez", "once", "doce", "trece", "catorce", "quince", "diecis√©is", "diecisiete", "dieciocho", "diecinueve" };
 string decenas[] = { "", "", "veinte", "treinta", "cuarenta", "cincuenta", "sesenta", "setenta", "ochenta", "noventa" };
 string centenas[] = { "", "ciento", "doscientos", "trescientos", "cuatrocientos", "quinientos", "seiscientos", "setecientos", "ochocientos", "novecientos" };
 
@@ -60,17 +60,17 @@ double validarNumeroReal(const char* mensaje) {
                     entradaValida = true;
                 }
                 else {
-                    cout << "ERROR: N˙mero fuera de rango (0.00 - 999,999,999.99).\nIntente nuevamente: ";
+                    cout << "ERROR: N√∫mero fuera de rango (0.00 - 999,999,999.99).\nIntente nuevamente: ";
                 }
             }
             else {
-                cout << "ERROR: Entrada inv·lida.\nIntente nuevamente: ";
+                cout << "ERROR: Entrada inv√°lida.\nIntente nuevamente: ";
                 cin.clear();
                 cin.ignore(10000, '\n');
             }
         }
         else {
-            cout << "ERROR: Entrada inv·lida.\nIntente nuevamente: ";
+            cout << "ERROR: Entrada inv√°lida.\nIntente nuevamente: ";
             cin.clear();
             cin.ignore(10000, '\n');
         }
@@ -96,17 +96,17 @@ int leerOpcionMenu() {
                     opcionValida = true;
                 }
                 else {
-                    cout << "ERROR: OpciÛn inv·lida. Intente nuevamente (1-2): ";
+                    cout << "ERROR: Opci√≥n inv√°lida. Intente nuevamente (1-2): ";
                 }
             }
             else {
-                cout << "ERROR: Entrada inv·lida.\nIntente nuevamente (1-2): ";
+                cout << "ERROR: Entrada inv√°lida.\nIntente nuevamente (1-2): ";
                 cin.clear();
                 cin.ignore(10000, '\n');
             }
         }
         else {
-            cout << "ERROR: Entrada inv·lida.\nIntente nuevamente (1-2): ";
+            cout << "ERROR: Entrada inv√°lida.\nIntente nuevamente (1-2): ";
             cin.clear();
             cin.ignore(10000, '\n');
         }
@@ -121,9 +121,9 @@ double leerMonto() {
 
 #pragma endregion
 
-#pragma region Funciones de ConversiÛn
+#pragma region Funciones de Conversi√≥n
 
-// Convierte n˙meros de 0 a 999 a palabras
+// Convierte n√∫meros de 0 a 999 a palabras
 string convertirCentenas(int numero) {
     if (numero == 0) return "";
     if (numero == 100) return "cien";
@@ -155,7 +155,7 @@ string convertirCentenas(int numero) {
     return resultado;
 }
 
-// FunciÛn recursiva divide y vencer·s
+// Funci√≥n recursiva divide y vencer√°s
 string convertirNumeroALetras(long numero) {
     if (numero == 0) return "cero";
 
@@ -166,7 +166,7 @@ string convertirNumeroALetras(long numero) {
     int cientos = numero % 1000;
 
     if (millones > 0) {
-        if (millones == 1) resultado += "un millÛn ";
+        if (millones == 1) resultado += "un mill√≥n ";
         else resultado += convertirNumeroALetras(millones) + " millones ";
     }
 
@@ -190,7 +190,7 @@ string convertirNumeroALetras(long numero) {
 #pragma region Funcion conversion
 
 void procesarConversion() {
-    cout << "\n--- CONVERTIR N⁄MERO A PALABRAS ---\n";
+    cout << "\n--- CONVERTIR N√öMERO A PALABRAS ---\n";
 
     double monto = leerMonto();
 
@@ -207,8 +207,8 @@ void procesarConversion() {
     }
 
     // Mostrar resultado
-    cout << "\n=== RESULTADO DE LA CONVERSI”N ===\n";
-    cout << "N˙mero ingresado: " << fixed << setprecision(2) << monto << "\n";
+    cout << "\n=== RESULTADO DE LA CONVERSI√ìN ===\n";
+    cout << "N√∫mero ingresado: " << fixed << setprecision(2) << monto << "\n";
     cout << "En palabras: " << numeroEnPalabras << " con ";
 
     if (centavos < 10) cout << "0"; // Ej: "con 09 centavos"
@@ -223,21 +223,21 @@ void procesarConversion() {
 
 void mostrarMenu() {
     cout << "=========================================\n";
-    cout << "       CONVERTIDOR N⁄MERO A PALABRAS\n";
+    cout << "       CONVERTIDOR N√öMERO A PALABRAS\n";
     cout << "=========================================\n";
     cout << "Rango: 0.00 - 999,999,999.99\n";
-    cout << "Enfoque: Divide y Vencer·s\n";
+    cout << "Enfoque: Divide y Vencer√°s\n";
     cout << "-----------------------------------------\n";
-    cout << "1. Convertir n˙mero a palabras\n";
+    cout << "1. Convertir n√∫mero a palabras\n";
     cout << "2. Salir\n";
     cout << "=========================================\n";
-    cout << "Seleccione una opciÛn: ";
+    cout << "Seleccione una opci√≥n: ";
 }
 
 int main() {
     int opcion;
 
-    cout << "Convertidor de N˙meros a Palabras\n";
+    cout << "Convertidor de N√∫meros a Palabras\n";
 
     do {
         mostrarMenu();
