@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\VSProjects\\Estructura2\\Teoria\\FuerzaBrutaEXPO\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{CCC6A3A8-A571-4647-982B-B02D06459F73}|FuerzaBrutaEXPO.vcxproj|C:\\VSProjects\\Estructura2\\Teoria\\FuerzaBrutaEXPO\\FuerzaBrutaEXPO.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{CCC6A3A8-A571-4647-982B-B02D06459F73}|FuerzaBrutaEXPO.vcxproj|solutionrelative:FuerzaBrutaEXPO.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FuerzaBrutaEXPO.cpp",
+              "DocumentMoniker": "C:\\VSProjects\\Estructura2\\Teoria\\FuerzaBrutaEXPO\\FuerzaBrutaEXPO.cpp",
+              "RelativeDocumentMoniker": "FuerzaBrutaEXPO.cpp",
+              "ToolTip": "C:\\VSProjects\\Estructura2\\Teoria\\FuerzaBrutaEXPO\\FuerzaBrutaEXPO.cpp",
+              "RelativeToolTip": "FuerzaBrutaEXPO.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-08-16T02:21:49.638Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
