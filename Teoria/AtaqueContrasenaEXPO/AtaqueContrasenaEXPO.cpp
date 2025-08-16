@@ -23,7 +23,7 @@ string caracteres =
 
 long long contador = 0;
 
-bool fuerzaBruta(string clave, string intento, int maxLong) {
+bool fuerzaBruta(string clave, string intento, size_t maxLong) {
     if (intento.size() == maxLong) {
         contador++;
 
