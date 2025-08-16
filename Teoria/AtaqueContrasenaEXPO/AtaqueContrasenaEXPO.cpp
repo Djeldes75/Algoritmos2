@@ -15,7 +15,12 @@
 
 using namespace std;
 
-string caracteres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+string caracteres =
+"abcdefghijklmnopqrstuvwxyz"
+"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+"0123456789"
+"!@#$%^&*()-_=+[]{};:'\",.<>?/\\|`~";
+
 long long contador = 0;
 
 bool fuerzaBruta(string clave, string intento, int maxLong) {
@@ -28,7 +33,7 @@ bool fuerzaBruta(string clave, string intento, int maxLong) {
 
         if (intento == clave) {
             cout << "\n========================================\n";
-            cout << "  ¡Contraseña encontrada! ??\n";
+            cout << "  Contrasena encontrada!\n";
             cout << "  -> " << intento << "\n";
             cout << "  Intentos totales: " << contador << "\n";
             cout << "========================================\n";
@@ -47,7 +52,9 @@ bool fuerzaBruta(string clave, string intento, int maxLong) {
 
 bool validarContrasena(const string& clave) {
     for (char c : clave) {
-        if (!isalnum(c)) return false;
+        if (caracteres.find(c) == string::npos) {
+            return false;
+        }
     }
     return true;
 }
@@ -58,11 +65,11 @@ int main() {
     cout << "       Simulacion de Ataque Brute Force     \n";
     cout << "============================================\n\n";
 
-    cout << "Ingrese una contrasena (solo letras o numeros, max 12 caracteres): ";
+    cout << "Ingrese una contrasena (letras, numeros o simbolos validos, max 18 caracteres): ";
     cin >> clave;
 
-    if (!validarContrasena(clave) || clave.size() > 12) {
-        cout << "Error: La contrasena solo debe contener letras/numeros y max 12 caracteres.\n";
+    if (!validarContrasena(clave) || clave.size() > 18) {
+        cout << "Error: La contrasena contiene caracteres no validos o excede el maximo de 18 caracteres.\n";
         return 1;
     }
 
