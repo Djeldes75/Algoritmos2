@@ -1,86 +1,60 @@
-/*
--------------------------------------------------------------------------------------------------------
-Tarea: #2 - Tic Tac Toe
-Materia: Estructuras De Datos y Algoritmos 2
--------------------------------------------------------------------------------------------------------
-Realizar un programa en C++ que permita jugar Tic Tac Toe (Tres en raya) entre dos jugadores humanos.
-
-RESTRICCIONES:
-    A. El programa debe solicitar los nombres de los jugadores.
-    B. Al ganar, debe mostrar el nombre del jugador ganador.
-    C. El programa almacena unicamente las 3 ultimas jugadas de cada jugador.
-    D. Antes de una nueva jugada, debe mostrar al jugador cual jugada sera eliminada.
-
-OBJETIVOS:
-    - Aplicar estructuras de datos simples (colas).
-    - Practicar validaciones, estructuras de control y modularidad.
-    - Reforzar la logica de juegos por turnos en consola.
-
-Fecha: 6/Ago/2025
-*/
-
 #include <iostream>
 #include <string>
-#include <vector>
 #include <queue>
-#include <limits> //HAY que quitarle un par de libreria como vector, limits Revisa. Si se pone "2a" se sale del juego, tien que revisar el manejo de errores HaAY MUCHOIS ERRORES,
+#include <limits>
 
 using namespace std;
 
-const int TAM = 3;
-const int MAX_JUGADAS = 3;
+const int TABLERO_TAM = 3;
+const int MAX_ULTIMAS_JUGADAS = 3;
 
 struct Jugada {
     int fila;
     int columna;
 };
 
-#pragma region Funciones de Utilidad
-
 void limpiarPantalla() {
-    cout << "\033[2J\033[1;1H"; // Limpia la consola (puede no funcionar en todos los sistemas)
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
 }
 
-void mostrarTablero(const vector<vector<char>>& tablero) {
-    cout << "\nTablero actual:\n";
-    for (int i = 0; i < TAM; ++i) {
-        for (int j = 0; j < TAM; ++j) {
-            cout << " " << tablero[i][j];
-            if (j < TAM - 1) cout << " |";
+void mostrarTablero(char tablero[TABLERO_TAM][TABLERO_TAM]) {
+    cout << "\nTablero:\n";
+    for (int fila = 0; fila < TABLERO_TAM; fila++) {
+        for (int col = 0; col < TABLERO_TAM; col++) {
+            cout << " " << tablero[fila][col];
+            if (col < TABLERO_TAM - 1) cout << " |";
         }
         cout << "\n";
-        if (i < TAM - 1) cout << "---+---+---\n";
+        if (fila < TABLERO_TAM - 1) cout << "---+---+---\n";
     }
-    cout << endl;
 }
 
-bool verificarGanador(const vector<vector<char>>& tablero, char simbolo) {
-    for (int i = 0; i < TAM; ++i) {
+bool hayGanador(char tablero[TABLERO_TAM][TABLERO_TAM], char simbolo) {
+    for (int i = 0; i < TABLERO_TAM; i++) {
         if ((tablero[i][0] == simbolo && tablero[i][1] == simbolo && tablero[i][2] == simbolo) ||
-            (tablero[0][i] == simbolo && tablero[1][i] == simbolo && tablero[2][i] == simbolo)) {
+            (tablero[0][i] == simbolo && tablero[1][i] == simbolo && tablero[2][i] == simbolo))
             return true;
-        }
     }
     if ((tablero[0][0] == simbolo && tablero[1][1] == simbolo && tablero[2][2] == simbolo) ||
-        (tablero[0][2] == simbolo && tablero[1][1] == simbolo && tablero[2][0] == simbolo)) {
+        (tablero[0][2] == simbolo && tablero[1][1] == simbolo && tablero[2][0] == simbolo))
         return true;
-    }
     return false;
 }
 
-bool tableroLleno(const vector<vector<char>>& tablero) {
-    for (const auto& fila : tablero)
-        for (char celda : fila)
-            if (celda == ' ')
-                return false;
+
+bool tableroLleno(char tablero[TABLERO_TAM][TABLERO_TAM]) {
+    for (int fila = 0; fila < TABLERO_TAM; fila++)
+        for (int col = 0; col < TABLERO_TAM; col++)
+            if (tablero[fila][col] == ' ') return false;
     return true;
 }
 
-#pragma endregion
+int leerEnteroEnRango(string mensaje, int minimo, int maximo) {
 
-#pragma region Validaciones
-
-int leerEnteroEnRango(const string& mensaje, int minimo, int maximo) {
     int valor;
     bool valido = false;
     while (!valido) {
@@ -97,73 +71,63 @@ int leerEnteroEnRango(const string& mensaje, int minimo, int maximo) {
     return valor;
 }
 
-#pragma endregion
-
-#pragma region Jugadas y Turnos
-
-void manejarJugada(queue<Jugada>& jugadas, int fila, int columna, const string& jugador) {
-    if (jugadas.size() == MAX_JUGADAS) {
-        Jugada porEliminar = jugadas.front();
-        cout << "Aviso: Se eliminara la jugada mas antigua de " << jugador << ": ("
-            << porEliminar.fila << ", " << porEliminar.columna << ")\n";
-        jugadas.pop();
+void registrarJugada(queue<Jugada>& ultimasJugadas, int fila, int columna, string nombreJugador) {
+    if (ultimasJugadas.size() == MAX_ULTIMAS_JUGADAS) {
+        Jugada jugadaEliminar = ultimasJugadas.front();
+        cout << "Se eliminara la jugada (" << jugadaEliminar.fila << "," << jugadaEliminar.columna << ") de " << nombreJugador << "\n";
+        ultimasJugadas.pop();
     }
-    jugadas.push({ fila, columna });
+    ultimasJugadas.push({ fila, columna });
 }
 
-#pragma endregion
-
-#pragma region Main del Juego
-
 void jugarTicTacToe() {
-    string jugador1, jugador2;
-    char simbolo1 = 'X', simbolo2 = 'O';
 
-    cout << "Ingrese el nombre del jugador 1 (X): ";
-    getline(cin, jugador1);
-    cout << "Ingrese el nombre del jugador 2 (O): ";
-    getline(cin, jugador2);
+    string nombreJugador1, nombreJugador2;
+    char tablero[TABLERO_TAM][TABLERO_TAM];
+    for (int fila = 0; fila < TABLERO_TAM; fila++)
+        for (int col = 0; col < TABLERO_TAM; col++)
+            tablero[fila][col] = ' ';
 
-    vector<vector<char>> tablero(TAM, vector<char>(TAM, ' '));
-    queue<Jugada> jugadasJ1, jugadasJ2;
+    cin.ignore();
+    cout << "Jugador 1 (X): "; getline(cin, nombreJugador1);
+    cout << "Jugador 2 (O): "; getline(cin, nombreJugador2);
 
+    queue<Jugada> ultimasJugadasJugador1, ultimasJugadasJugador2;
     bool turnoJugador1 = true;
 
     while (true) {
         mostrarTablero(tablero);
 
-        string nombre = turnoJugador1 ? jugador1 : jugador2;
-        char simbolo = turnoJugador1 ? simbolo1 : simbolo2;
-        queue<Jugada>& jugadas = turnoJugador1 ? jugadasJ1 : jugadasJ2;
+        string jugadorActual = turnoJugador1 ? nombreJugador1 : nombreJugador2;
+        char simboloActual = turnoJugador1 ? 'X' : 'O';
+        queue<Jugada>& ultimasJugadas = turnoJugador1 ? ultimasJugadasJugador1 : ultimasJugadasJugador2;
 
-        cout << nombre << " (" << simbolo << "), es tu turno.\n";
+        cout << jugadorActual << " (" << simboloActual << ") tu turno.\n";
 
-        if (jugadas.size() == MAX_JUGADAS) {
-            Jugada porEliminar = jugadas.front();
-            cout << "Nota: Se eliminara la jugada ("
-                << porEliminar.fila << ", " << porEliminar.columna << ") si realizas una nueva.\n";
+        if (ultimasJugadas.size() == MAX_ULTIMAS_JUGADAS) {
+            Jugada jugadaEliminar = ultimasJugadas.front();
+            cout << "Se borrara la jugada (" << jugadaEliminar.fila << "," << jugadaEliminar.columna << ") si juegas otra.\n";
         }
 
-        int fila = leerEnteroEnRango("Ingrese fila (0-2): ", 0, 2);
-        int columna = leerEnteroEnRango("Ingrese columna (0-2): ", 0, 2);
+        int fila, columna;
+        do {
+            fila = leerEnteroEnRango("Fila (0-2): ", 0, 2);
+            columna = leerEnteroEnRango("Columna (0-2): ", 0, 2);
+            if (tablero[fila][columna] != ' ') cout << "Casilla ocupada. Intente otra.\n";
+        } while (tablero[fila][columna] != ' ');
 
-        if (tablero[fila][columna] != ' ') {
-            cout << "Casilla ocupada. Intente de nuevo.\n";
-            continue;
-        }
+        tablero[fila][columna] = simboloActual;
+        registrarJugada(ultimasJugadas, fila, columna, jugadorActual);
 
-        tablero[fila][columna] = simbolo;
-        manejarJugada(jugadas, fila, columna, nombre);
-
-        if (verificarGanador(tablero, simbolo)) {
+        if (hayGanador(tablero, simboloActual)) {
             mostrarTablero(tablero);
-            cout << "Felicidades " << nombre << ", has ganado!\n";
+            cout << "Felicidades " << jugadorActual << ", ganaste!\n";
             break;
         }
 
         if (tableroLleno(tablero)) {
             mostrarTablero(tablero);
-            cout << "El juego termino en empate.\n";
+            cout << "Empate!\n";
             break;
         }
 
@@ -171,34 +135,18 @@ void jugarTicTacToe() {
     }
 }
 
-#pragma endregion
-
-#pragma region Menu Principal
-
 int main() {
     int opcion;
     do {
-        cout << "=========================================\n";
-        cout << "              TIC TAC TOE\n";
-        cout << "=========================================\n";
-        cout << "1. Jugar\n";
-        cout << "2. Salir\n";
-        cout << "Seleccione una opcion: ";
+        cout << "TicTacToe\n1. Jugar\n2. Salir\nOpcion: ";
         opcion = leerEnteroEnRango("", 1, 2);
-
-        switch (opcion) {
-        case 1:
+        if (opcion == 1) {
             limpiarPantalla();
             jugarTicTacToe();
-            break;
-        case 2:
-            cout << "Gracias por jugar. Hasta luego!\n";
-            break;
         }
-
+        else if (opcion == 2) {
+            cout << "BYE BYE!\n";
+        }
     } while (opcion != 2);
-
-    return 0;
 }
 
-#pragma endregion
