@@ -1,46 +1,77 @@
 #include <iostream>
-
 using namespace std;
 
-int matriz[3][3];
-int numeros[9] = { 1,2,3,4,5,6,7,8,9 };
+const int matriz3x3 = 3;
+const int valorMagico = 15;
+
+int cuadrado[matriz3x3][matriz3x3];
+bool usado[10];
+
+bool esValido(int fila, int col) {
+
+    if (col == matriz3x3 - 1) {
+        int suma = 0;
+        for (int j = 0; j < matriz3x3; j++) suma += cuadrado[fila][j];
+        if (suma != valorMagico) return false;
+    }
+
+    if (fila == matriz3x3 - 1) {
+        int suma = 0;
+        for (int i = 0; i < matriz3x3; i++) suma += cuadrado[i][col];
+        if (suma != valorMagico) return false;
+    }
+
+    if (fila == matriz3x3 - 1 && col == matriz3x3 - 1) {
+        int suma = 0;
+        for (int i = 0; i < matriz3x3; i++) suma += cuadrado[i][i];
+        if (suma != valorMagico) return false;
+    }
+
+    if (fila == matriz3x3 - 1 && col == 0) {
+        int suma = 0;
+        for (int i = 0; i < matriz3x3; i++) suma += cuadrado[i][matriz3x3 - 1 - i];
+        if (suma != valorMagico) return false;
+    }
+
+    return true;
+}
+
+void resolver(int fila, int col) {
+
+    if (fila == matriz3x3) {
+
+        cout << "Solucion encontrada:\n";
+        for (int i = 0; i < matriz3x3; i++) {
+
+            for (int j = 0; j < matriz3x3; j++) {
+                cout << cuadrado[i][j] << " ";
+            }
+            cout << "\n";
+        }
+        cout << "-----------------\n";
+        return;
+    }
+
+    int siguienteFila = (col == matriz3x3 - 1) ? fila + 1 : fila;
+    int siguienteCol = (col == matriz3x3 - 1) ? 0 : col + 1;
+
+    for (int num = 1; num <= 9; num++) {
+        if (!usado[num]) {
+            cuadrado[fila][col] = num;
+            usado[num] = true;
+
+            if (esValido(fila, col)) {
+                resolver(siguienteFila, siguienteCol);
+            }
+
+            usado[num] = false;
+        }
+    }
+}
 
 int main() {
 
-	// Inicializar la matriz con ceros
-	for (int i = 0; i < 3; i++) {
-		for (int j = 0; j < 3; j++) {
-			matriz[i][j] = 0;
-		}
-	}
-	// Asignar los números del 1 al 9 a la matriz
-	int index = 0;
-	for (int i = 0; i < 3; i++) {
-		for (int j = 0; j < 3; j++) {
-			matriz[i][j] = numeros[index++];
-		}
-	}
-	// Mostrar la matriz
-	for (int i = 0; i < 3; i++) {
-		for (int j = 0; j < 3; j++) {
-			cout << matriz[i][j] << " ";
-		}
-		cout << endl;
-	}
-
-	return 0;
+    for (int i = 0; i < 10; i++) usado[i] = false;
+    resolver(0, 0);
+    return 0;
 }
-
-/*
-Entregar en el laboratorio en parejas (5 puntos).
-
-Realizar un programa en C++ donde cree una matriz 3*3 y muestre todas las posibles combinaciones
-donde la sumatoria de cada fila, columnas y diagonales sean iguales (Utilizando backtracking ).
-Cada numero del 1 al 9 debe ser utilizado una sola vez.
-
-Ejemplo de salida:
-8 1 6 = 15
-3 5 7 = 15
-4 9 2 = 15
-
-*/
