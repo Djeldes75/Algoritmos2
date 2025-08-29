@@ -5,8 +5,8 @@
 
 using namespace std;
 
-const int TABLERO_TAM = 3;
-const int MAX_ULTIMAS_JUGADAS = 3;
+const int tamanoTablero = 3;
+const int maxUltJugadas = 3;
 
 struct Jugada {
     int fila;
@@ -21,20 +21,20 @@ void limpiarPantalla() {
 #endif
 }
 
-void mostrarTablero(char tablero[TABLERO_TAM][TABLERO_TAM]) {
+void mostrarTablero(char tablero[tamanoTablero][tamanoTablero]) {
     cout << "\nTablero:\n";
-    for (int fila = 0; fila < TABLERO_TAM; fila++) {
-        for (int col = 0; col < TABLERO_TAM; col++) {
+    for (int fila = 0; fila < tamanoTablero; fila++) {
+        for (int col = 0; col < tamanoTablero; col++) {
             cout << " " << tablero[fila][col];
-            if (col < TABLERO_TAM - 1) cout << " |";
+            if (col < tamanoTablero - 1) cout << " |";
         }
         cout << "\n";
-        if (fila < TABLERO_TAM - 1) cout << "---+---+---\n";
+        if (fila < tamanoTablero - 1) cout << "---+---+---\n";
     }
 }
 
-bool hayGanador(char tablero[TABLERO_TAM][TABLERO_TAM], char simbolo) {
-    for (int i = 0; i < TABLERO_TAM; i++) {
+bool hayGanador(char tablero[tamanoTablero][tamanoTablero], char simbolo) {
+    for (int i = 0; i < tamanoTablero; i++) {
         if ((tablero[i][0] == simbolo && tablero[i][1] == simbolo && tablero[i][2] == simbolo) ||
             (tablero[0][i] == simbolo && tablero[1][i] == simbolo && tablero[2][i] == simbolo))
             return true;
@@ -46,9 +46,9 @@ bool hayGanador(char tablero[TABLERO_TAM][TABLERO_TAM], char simbolo) {
 }
 
 
-bool tableroLleno(char tablero[TABLERO_TAM][TABLERO_TAM]) {
-    for (int fila = 0; fila < TABLERO_TAM; fila++)
-        for (int col = 0; col < TABLERO_TAM; col++)
+bool tableroLleno(char tablero[tamanoTablero][tamanoTablero]) {
+    for (int fila = 0; fila < tamanoTablero; fila++)
+        for (int col = 0; col < tamanoTablero; col++)
             if (tablero[fila][col] == ' ') return false;
     return true;
 }
@@ -72,7 +72,7 @@ int leerEnteroEnRango(string mensaje, int minimo, int maximo) {
 }
 
 void registrarJugada(queue<Jugada>& ultimasJugadas, int fila, int columna, string nombreJugador) {
-    if (ultimasJugadas.size() == MAX_ULTIMAS_JUGADAS) {
+    if (ultimasJugadas.size() == maxUltJugadas) {
         Jugada jugadaEliminar = ultimasJugadas.front();
         cout << "Se eliminara la jugada (" << jugadaEliminar.fila << "," << jugadaEliminar.columna << ") de " << nombreJugador << "\n";
         ultimasJugadas.pop();
@@ -83,9 +83,9 @@ void registrarJugada(queue<Jugada>& ultimasJugadas, int fila, int columna, strin
 void jugarTicTacToe() {
 
     string nombreJugador1, nombreJugador2;
-    char tablero[TABLERO_TAM][TABLERO_TAM];
-    for (int fila = 0; fila < TABLERO_TAM; fila++)
-        for (int col = 0; col < TABLERO_TAM; col++)
+    char tablero[tamanoTablero][tamanoTablero];
+    for (int fila = 0; fila < tamanoTablero; fila++)
+        for (int col = 0; col < tamanoTablero; col++)
             tablero[fila][col] = ' ';
 
     cin.ignore();
@@ -104,7 +104,7 @@ void jugarTicTacToe() {
 
         cout << jugadorActual << " (" << simboloActual << ") tu turno.\n";
 
-        if (ultimasJugadas.size() == MAX_ULTIMAS_JUGADAS) {
+        if (ultimasJugadas.size() == maxUltJugadas) {
             Jugada jugadaEliminar = ultimasJugadas.front();
             cout << "Se borrara la jugada (" << jugadaEliminar.fila << "," << jugadaEliminar.columna << ") si juegas otra.\n";
         }
