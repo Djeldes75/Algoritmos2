@@ -1,35 +1,59 @@
 #include <iostream>
-#include <vector>
 
 using namespace std;
 
-int pesoMax = 100;
+int maxMochila = 100; //kg
+int peso[5] = { 10, 20, 30, 40, 50 };
+int beneficio[5] = { 20, 30, 65, 40, 60 };
+float beneficioPeso[5];
+int numPaquetes = 5;
+float capacidad = 100;
+bool escogido[5] = { false, false, false, false, false };
 
-vector<int> pesoPaquete = { 10, 20, 30, 40, 50 };
-vector<int> beneficioPaquete = {20, 30, 65, 40, 60};
+float llenarMochila() {
+
+    for (int i = 0; i < numPaquetes; i++) {
+        beneficioPeso[i] = (float)beneficio[i] / peso[i];
+    }
+
+    float beneficioTotal = 0.0;
+
+    while (capacidad > 0) {
+
+        int best = -1;
+        float bestRatio = -1.0;
+
+        for (int i = 0; i < numPaquetes; i++) {
+            if (!escogido[i] && beneficioPeso[i] > bestRatio) {
+                bestRatio = beneficioPeso[i];
+                best = i;
+            }
+        }
+
+        if (best == -1) break;
+
+        if (peso[best] <= capacidad) {
+
+            capacidad -= peso[best];
+            beneficioTotal += beneficio[best];
+            escogido[best] = true;
+            cout << "Tomo completo: " << peso[best] << "kg -> +" << beneficio[best] << "\n";
+        }
+        else {
+            float fraccion = capacidad / peso[best];
+            beneficioTotal += beneficio[best] * fraccion;
+            cout << "Tomo " << capacidad << "kg de " << peso[best]
+                << "kg (" << fraccion * 100 << "%) -> +" << beneficio[best] * fraccion << "\n";
+            capacidad = 0;
+        }
+    }
+
+    return beneficioTotal;
+}
 
 int main() {
 
-	//Funcion principal lol
-	int pesoAcumulado = 0;
-	int beneficioAcumulado = 0;
-
-
-
-	return 0;
+    float beneficioTotal = llenarMochila();
+    cout << "\nEl beneficio total es: " << beneficioTotal << endl;
+    return 0;
 }
-
-/*
-
-ENUNCIADO DEL PROBLEMA
-Una mochila puede soportar un peso máximo de 100Kgs. Acepte los paquetes posibles y que
-forman parte de la restricción del problema de forma que obtenga un beneficio máximo.
-
-PESO PAQUETES: 10 20 30 40 50
-BENEFICIO: 20 30 65 40 60
-
-RESTRICCIONES:
-A. No se debe sobrepasar el umbral del soporte de la mochila (100Kgr).
-B. Si puede fraccionar el espacio que queda en la mochila realícelo.
-
-*/
