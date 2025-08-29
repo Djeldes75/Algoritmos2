@@ -13,9 +13,10 @@ int main() {
     bool tomado[numPaquetes] = { false, false, false, false, false };
 
     float auxMochila = maxMochila;
-    float benTotal = 0;
+    float beneficioTotal = 0;
 
     float ratio[numPaquetes];
+    ////////////////////////////////
 
     for (int i = 0; i < numPaquetes; i++) {
         ratio[i] = (float)beneficio[i] / (float)peso[i];
@@ -38,7 +39,7 @@ int main() {
         if (peso[best] <= auxMochila) {
 
             auxMochila -= peso[best];
-            benTotal += beneficio[best];
+            beneficioTotal += beneficio[best];
             tomado[best] = true;
 
             cout << "Tomo el paquete COMPLETO de " << peso[best]
@@ -48,14 +49,16 @@ int main() {
 
             float frac = auxMochila / (float)peso[best];
 
-            benTotal += beneficio[best] * frac;
+            beneficioTotal += beneficio[best] * frac;
 
-            cout << "Tomo una FRACCION del paquete de " << peso[best]
-                 << "kg: solo " << auxMochila << "kg (" << frac * 100.0f << "%), +" << beneficio[best] * frac << "\n";
+            cout << "\nTomo una FRACCION del paquete de " << peso[best]
+                 << "kg:\nSolo quedan " << auxMochila << "kg disponibles, (" << frac * 100.0f << "%), --> (beneficio)/80% = "
+                 << beneficio[best] * frac << " beneficio agregado.\n";
+
             auxMochila = 0.0f;
         }
     }
 
-    cout << "\nBeneficio total maximo de los paquetes: " << benTotal << ".\n" << "BYE BYE!! ;D\n";
+    cout << "\nBeneficio total maximo de los paquetes: " << beneficioTotal << ".\n" << "BYE BYE!! ;D\n";
     return 0;
 }
