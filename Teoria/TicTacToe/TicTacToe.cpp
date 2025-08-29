@@ -14,11 +14,10 @@ struct Jugada {
 };
 
 void limpiarPantalla() {
-#ifdef _WIN32
-    system("cls");
-#else
-    system("clear");
-#endif
+    if (_WIN32)
+    {
+        system("cls");
+    }
 }
 
 void mostrarTablero(char tablero[tamanoTablero][tamanoTablero]) {
