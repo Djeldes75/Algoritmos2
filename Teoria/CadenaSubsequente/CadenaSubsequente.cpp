@@ -1,20 +1,54 @@
-// CadenaSubsequente.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
+#include <string>
+#include <vector>
 
-int main()
-{
-    std::cout << "Hello World!\n";
+using namespace std;
+
+string LCS(string X, string Y) {
+    int m = X.size();
+    int n = Y.size();
+
+    vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
+
+    for (int i = 1; i <= m; i++) {
+
+        for (int j = 1; j <= n; j++) {
+
+            if (toupper(X[i - 1]) == toupper(Y[j - 1]))
+
+                dp[i][j] = dp[i - 1][j - 1] + 1;
+            else
+                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
+        }
+    }
+
+    string lcs = "";
+    int i = m, j = n;
+    while (i > 0 && j > 0) {
+        if (toupper(X[i - 1]) == toupper(Y[j - 1])) {
+            lcs = (char)toupper(X[i - 1]) + lcs;
+            i--; j--;
+        }
+        else if (dp[i - 1][j] > dp[i][j - 1])
+            i--;
+        else
+            j--;
+    }
+
+    return lcs;
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
+int main() {
+    string cadena1, cadena2;
+    cout << "Ingrese la primera cadena: ";
+    cin >> cadena1;
+    cout << "Ingrese la segunda cadena: ";
+    cin >> cadena2;
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+    string subsecuencia = LCS(cadena1, cadena2);
+
+    cout << "\nLongitud de la LCS: " << subsecuencia.size() << endl;
+    cout << "Subsecuencia en mayusculas: " << subsecuencia << endl;
+
+    return 0;
+}
