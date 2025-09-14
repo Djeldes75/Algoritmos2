@@ -2,7 +2,7 @@
 using namespace std;
 
 const int matriz3x3 = 3;
-const int valorMagico = 15;
+const int valorQuerido = 15;
 
 int cuadrado[matriz3x3][matriz3x3];
 bool usado[10];
@@ -12,25 +12,25 @@ bool esValido(int fila, int col) {
     if (col == matriz3x3 - 1) {
         int suma = 0;
         for (int j = 0; j < matriz3x3; j++) suma += cuadrado[fila][j];
-        if (suma != valorMagico) return false;
+        if (suma != valorQuerido) return false;
     }
 
     if (fila == matriz3x3 - 1) {
         int suma = 0;
         for (int i = 0; i < matriz3x3; i++) suma += cuadrado[i][col];
-        if (suma != valorMagico) return false;
+        if (suma != valorQuerido) return false;
     }
 
     if (fila == matriz3x3 - 1 && col == matriz3x3 - 1) {
         int suma = 0;
         for (int i = 0; i < matriz3x3; i++) suma += cuadrado[i][i];
-        if (suma != valorMagico) return false;
+        if (suma != valorQuerido) return false;
     }
 
     if (fila == matriz3x3 - 1 && col == 0) {
         int suma = 0;
         for (int i = 0; i < matriz3x3; i++) suma += cuadrado[i][matriz3x3 - 1 - i];
-        if (suma != valorMagico) return false;
+        if (suma != valorQuerido) return false;
     }
 
     return true;
