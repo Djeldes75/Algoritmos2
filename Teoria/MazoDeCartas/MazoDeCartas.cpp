@@ -9,20 +9,26 @@ using namespace std;
 #pragma region El Mazo
 
 struct Card {
+
     string value;
     string suit;
+
     string toString() const {
         return value + " de " + suit;
     }
 };
 
 vector<Card> createDeck() {
+
     vector<string> values = { "A", "2", "3", "4", "5", "6", "7",
                               "8", "9", "10", "J", "Q", "K" };
+
     vector<string> suits = { "Corazones", "Treboles", "Diamantes", "Picas" };
 
     vector<Card> deck;
+
     for (auto& s : suits) {
+
         for (auto& v : values) {
             deck.push_back({ v, s });
         }
@@ -34,9 +40,12 @@ vector<Card> createDeck() {
 #pragma region QuickSort/Particion/Barajar
 
 int partition(vector<pair<int, Card>>& arr, int low, int high) {
+
     int pivot = arr[high].first;
     int i = low - 1;
+
     for (int j = low; j < high; j++) {
+
         if (arr[j].first <= pivot) {
             i++;
             swap(arr[i], arr[j]);
@@ -51,9 +60,7 @@ void quickSort(vector<pair<int, Card>>& arr, int low, int high) {
     if (low < high) {
 
         int pi = partition(arr, low, high);
-
         quickSort(arr, low, pi - 1);
-
         quickSort(arr, pi + 1, high);
     }
 }
@@ -68,12 +75,12 @@ void shuffleDeckQuick(vector<Card>& deck) {
     quickSort(temp, 0, (int)temp.size() - 1);
 
     for (size_t i = 0; i < deck.size(); i++)
-
         deck[i] = temp[i].second;
 }
 #pragma endregion
 
 #pragma region Verificaciones
+
 bool containsSequence(const vector<Card>& deck, const vector<Card>& sequence) {
 
     for (size_t i = 0; i + sequence.size() <= deck.size(); i++) {
@@ -109,7 +116,7 @@ bool fourAcesInRow(const vector<Card>& deck) {
 }
 #pragma endregion
 
-#pragma region Usuario
+#pragma region Cosas de Usuario
 
 Card pedirCarta(const vector<Card>& deck, const vector<Card>& yaElegidas, vector<string>& palosUsados) {
 
@@ -118,16 +125,16 @@ Card pedirCarta(const vector<Card>& deck, const vector<Card>& yaElegidas, vector
     vector<string> palos = { "Corazones", "Treboles", "Diamantes", "Picas" };
 
     Card c;
-
     bool valida = false;
 
     while (!valida) {
         cout << "Ingrese el numero de la carta (A ,2-10 ,J ,Q ,K): ";
         cin >> c.value;
 
-        // Validar valor
         bool existeValor = false;
+
         for (auto& v : valores) if (c.value == v) { existeValor = true; break; }
+
         if (!existeValor) {
             cout << "Valor no valido.\n";
             continue;
@@ -146,7 +153,6 @@ Card pedirCarta(const vector<Card>& deck, const vector<Card>& yaElegidas, vector
         }
         c.suit = palos[opcion - 1];
 
-		//PALO REPETIDO
         bool paloRepetido = false;
 
         for (auto& p : palosUsados) {
@@ -157,9 +163,10 @@ Card pedirCarta(const vector<Card>& deck, const vector<Card>& yaElegidas, vector
             continue;
         }
 
-		//Carta repetida
         bool repetida = false;
+
         for (auto& x : yaElegidas) {
+
             if (x.value == c.value && x.suit == c.suit) {
                 repetida = true; break;
             }
@@ -174,7 +181,6 @@ Card pedirCarta(const vector<Card>& deck, const vector<Card>& yaElegidas, vector
     }
     return c;
 }
-
 #pragma endregion
 
 #pragma region Main
@@ -217,9 +223,26 @@ int main() {
     }
 
     if (foundSequence) {
+
         cout << "\nSecuencia encontrada despues de " << shuffles << " barajadas.\n";
+        cout << "Mazo final (las 3 cartas elegidas en negrita):\n";
+
         for (auto& c : deck) {
-            cout << c.toString() << "\n";
+
+            bool highlight = false;
+
+            for (auto& sel : chosen) {
+
+                if (c.value == sel.value && c.suit == sel.suit) {
+                    highlight = true; break;
+                }
+            }
+            if (highlight) {
+                cout << "\033[1m" << c.toString() << "\033[0m\n"; // <-- NEGRITA
+            }
+            else {
+                cout << c.toString() << "\n";
+            }
         }
     }
     else {
