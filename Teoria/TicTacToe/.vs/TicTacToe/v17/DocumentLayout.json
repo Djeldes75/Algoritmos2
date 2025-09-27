@@ -1,9 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\VSProjects\\Estructura2\\Teoria\\TicTacToe\\",
+  "WorkspaceRootPath": "C:\\VS-Project\\Algoritmos2\\Teoria\\TicTacToe\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{32B6C715-AA9D-427D-A6BE-13A91AAAD456}|TicTacToe.vcxproj|C:\\VSProjects\\Estructura2\\Teoria\\TicTacToe\\TicTacToe.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{32B6C715-AA9D-427D-A6BE-13A91AAAD456}|TicTacToe.vcxproj|C:\\VS-Project\\Algoritmos2\\Teoria\\TicTacToe\\TicTacToe.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{32B6C715-AA9D-427D-A6BE-13A91AAAD456}|TicTacToe.vcxproj|solutionrelative:TicTacToe.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
@@ -14,19 +14,23 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "TicTacToe.cpp",
-              "DocumentMoniker": "C:\\VSProjects\\Estructura2\\Teoria\\TicTacToe\\TicTacToe.cpp",
+              "DocumentMoniker": "C:\\VS-Project\\Algoritmos2\\Teoria\\TicTacToe\\TicTacToe.cpp",
               "RelativeDocumentMoniker": "TicTacToe.cpp",
-              "ToolTip": "C:\\VSProjects\\Estructura2\\Teoria\\TicTacToe\\TicTacToe.cpp",
+              "ToolTip": "C:\\VS-Project\\Algoritmos2\\Teoria\\TicTacToe\\TicTacToe.cpp",
               "RelativeToolTip": "TicTacToe.cpp",
-              "ViewState": "AgIAAFMAAAAAAAAAAAAMwGYAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAIEAAAAAAAAAAAAAAI4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-08-29T09:49:08.772Z",
+              "WhenOpened": "2025-09-26T20:35:07.614Z",
               "EditorCaption": ""
             }
           ]
