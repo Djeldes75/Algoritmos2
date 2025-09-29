@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{f38acef4-c4d4-467d-9dee-276e7a981d10}</ProjectGuid>
-    <RootNamespace>CaballosBacktracking</RootNamespace>
+    <ProjectGuid>{47447839-a162-4fff-9b99-86a5e4dc6db1}</ProjectGuid>
+    <RootNamespace>Caballos</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -123,7 +123,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Caballos_Backtracking.cpp" />
+    <ClCompile Include="Caballos.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

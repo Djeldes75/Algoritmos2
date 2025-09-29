@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Caballos_Backtracking.cpp">
+    <ClCompile Include="Caballos.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
