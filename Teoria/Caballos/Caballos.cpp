@@ -12,18 +12,6 @@ bool esSeguro(int x, int y, const vector<vector<int>>& sol, int N) {
     return (x >= 0 && x < N && y >= 0 && y < N && sol[x][y] == -1);
 }
 
-/**
- * Funcion recursiva de backtracking para resolver el Paseo del Caballo.
- * @param x posicion actual en fila
- * @param y posicion actual en columna
- * @param mov numero de movimiento actual
- * @param sol matriz que guarda el recorrido del caballo
- * @param xMov posibles movimientos en X del caballo
- * @param yMov posibles movimientos en Y del caballo
- * @param N tamano del tablero
- * @return true si se encuentra un recorrido completo, false en caso contrario
- */
-
 bool resolverPaseo(int x, int y, int mov,
     vector<vector<int>>& sol,
     const vector<int>& xMov,
