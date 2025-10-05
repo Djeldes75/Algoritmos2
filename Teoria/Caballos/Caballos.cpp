@@ -4,7 +4,7 @@
 using namespace std;
 
 /**
- * Verifica si la posición (x, y) es válida:
+ * Verifica si la posicion (x, y) es valida:
  *  - Debe estar dentro del tablero (0 <= x, y < N)
  *  - Debe ser una casilla no visitada (sol[x][y] == -1)
  */
@@ -13,16 +13,17 @@ bool esSeguro(int x, int y, const vector<vector<int>>& sol, int N) {
 }
 
 /**
- * Función recursiva de backtracking para resolver el Paseo del Caballo.
- * @param x posición actual en fila
- * @param y posición actual en columna
- * @param mov número de movimiento actual
+ * Funcion recursiva de backtracking para resolver el Paseo del Caballo.
+ * @param x posicion actual en fila
+ * @param y posicion actual en columna
+ * @param mov numero de movimiento actual
  * @param sol matriz que guarda el recorrido del caballo
  * @param xMov posibles movimientos en X del caballo
  * @param yMov posibles movimientos en Y del caballo
- * @param N tamaño del tablero
+ * @param N tamano del tablero
  * @return true si se encuentra un recorrido completo, false en caso contrario
  */
+
 bool resolverPaseo(int x, int y, int mov,
     vector<vector<int>>& sol,
     const vector<int>& xMov,
@@ -38,45 +39,40 @@ bool resolverPaseo(int x, int y, int mov,
         int ySig = y + yMov[k];
 
         if (esSeguro(xSig, ySig, sol, N)) {
-            sol[xSig][ySig] = mov;  // marcar casilla como visitada
+            sol[xSig][ySig] = mov;
 
-            // Llamada recursiva
             if (resolverPaseo(xSig, ySig, mov + 1, sol, xMov, yMov, N))
                 return true;
 
-            // Retroceder (backtrack)
             sol[xSig][ySig] = -1;
         }
     }
-    return false; // no hay movimiento posible
+    return false;
 }
 
 int main() {
     int N, inicioX, inicioY;
 
-    cout << "Ingrese el tamaño del tablero N: ";
+    cout << "Ingrese el tamano del tablero N: ";
     cin >> N;
 
-    cout << "Ingrese la posición inicial del caballo (fila y columna, 0-indexadas):\n";
+    cout << "Ingrese la posicion inicial del caballo (fila y columna, 0-indexadas):\n";
     cout << "Fila: ";
     cin >> inicioX;
     cout << "Columna: ";
     cin >> inicioY;
 
-    // Validar la posición inicial
+    // Validar la posicion inicial
     if (inicioX < 0 || inicioX >= N || inicioY < 0 || inicioY >= N) {
-        cout << "Posición inicial fuera del tablero.\n";
+        cout << "Posicion inicial fuera del tablero.\n";
         return 0;
     }
 
-    // Matriz para guardar la solución
     vector<vector<int>> sol(N, vector<int>(N, -1));
 
-    // Posibles movimientos en L del caballo
     vector<int> xMov = { 2, 1, -1, -2, -2, -1, 1, 2 };
     vector<int> yMov = { 1, 2,  2,  1, -1, -2, -2, -1 };
 
-    // La posición inicial se marca con 0
     sol[inicioX][inicioY] = 0;
 
     if (resolverPaseo(inicioX, inicioY, 1, sol, xMov, yMov, N)) {
@@ -89,7 +85,7 @@ int main() {
         }
     }
     else {
-        cout << "No existe una solución para el recorrido del caballo.\n";
+        cout << "No existe una solucion para el recorrido del caballo.\n";
     }
 
     return 0;
