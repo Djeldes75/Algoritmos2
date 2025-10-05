@@ -3,11 +3,6 @@
 
 using namespace std;
 
-/**
- * Verifica si la posicion (x, y) es valida:
- *  - Debe estar dentro del tablero (0 <= x, y < N)
- *  - Debe ser una casilla no visitada (sol[x][y] == -1)
- */
 bool esSeguro(int x, int y, const vector<vector<int>>& sol, int N) {
     return (x >= 0 && x < N && y >= 0 && y < N && sol[x][y] == -1);
 }
@@ -17,11 +12,10 @@ bool resolverPaseo(int x, int y, int mov,
     const vector<int>& xMov,
     const vector<int>& yMov,
     int N) {
-    // Caso base: Si ya visitamos todas las casillas
+
     if (mov == N * N)
         return true;
 
-    // Probar todos los posibles movimientos del caballo
     for (int k = 0; k < 8; k++) {
         int xSig = x + xMov[k];
         int ySig = y + yMov[k];
@@ -50,7 +44,6 @@ int main() {
     cout << "Columna: ";
     cin >> inicioY;
 
-    // Validar la posicion inicial
     if (inicioX < 0 || inicioX >= N || inicioY < 0 || inicioY >= N) {
         cout << "Posicion inicial fuera del tablero.\n";
         return 0;
