@@ -4,6 +4,7 @@
 #include <queue>
 #include <deque>
 #include <algorithm>
+
 using namespace std;
 
 static const int LINEAS[8][3] = {
