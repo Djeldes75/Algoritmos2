@@ -2,6 +2,7 @@
 #include <vector>
 #include <iomanip>
 #include <algorithm>
+
 using namespace std;
 
 const int MOV_X[8] = { 2, 1, -1, -2, -2, -1, 1, 2 };
@@ -21,7 +22,7 @@ int contarOpciones(int x, int y, int N, const vector<vector<int>>& tablero) {
     return count;
 }
 
-// Implementa la heuristica de Warnsdorff (sin recursividad)
+// Warnsdorff -PDA heur
 bool paseoCaballo(int N, int startX, int startY, vector<vector<int>>& tablero) {
     int x = startX;
     int y = startY;
@@ -31,7 +32,6 @@ bool paseoCaballo(int N, int startX, int startY, vector<vector<int>>& tablero) {
         int minOpciones = 9;
         int nextX = -1, nextY = -1;
 
-        // Buscar el siguiente movimiento con menos opciones futuras
         for (int i = 0; i < 8; ++i) {
             int nx = x + MOV_X[i];
             int ny = y + MOV_Y[i];
@@ -45,7 +45,6 @@ bool paseoCaballo(int N, int startX, int startY, vector<vector<int>>& tablero) {
             }
         }
 
-        // Si no hay mas movimientos validos, no hay solucion
         if (nextX == -1 || nextY == -1)
             return false;
 
@@ -77,7 +76,7 @@ int main() {
     cout << "=== Problema del Paseo del Caballo ===\n";
     cout << "Tamano del tablero: ";
     cin >> N;
-    cout << "Posicion inicial (fila y columna, 0-indexadas): ";
+    cout << "Posicion inicial (fila-columna): ";
     cin >> fila >> col;
 
     if (fila < 0 || fila >= N || col < 0 || col >= N) {
