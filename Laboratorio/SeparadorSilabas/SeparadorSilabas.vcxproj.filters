@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Folder.cpp">
+    <ClCompile Include="SeparadorSilabas.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

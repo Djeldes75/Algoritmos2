@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{5efacd7d-e7e8-44eb-a6d3-025f2475832a}</ProjectGuid>
-    <RootNamespace>Folder</RootNamespace>
+    <ProjectGuid>{ec4b1ed0-6556-4c37-8a8d-042b6611957e}</ProjectGuid>
+    <RootNamespace>Folders</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -124,7 +124,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Folder.cpp" />
+    <ClCompile Include="Folders.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
